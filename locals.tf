@@ -1,3 +1,10 @@
 locals {
-  repositories = {}
+  repositories = {
+    "terraform-github" = {
+      description = "Configuration as code management of organization repositories."
+      name        = "terraform-github"
+      topics      = ["configuration-as-code", "github", "terraform"]
+      visibility  = "public"
+    }
+  }
 }
