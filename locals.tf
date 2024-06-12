@@ -1,5 +1,11 @@
 locals {
   repositories = {
+    "ansible-demo-platform" = {
+      description = "Configuration as code management of my demo AAP instance."
+      name        = "ansible-demo-platform"
+      topics      = ["configuration-as-code", "ansible"]
+      visibility  = "public"
+    },
     "terraform-github" = {
       description = "Configuration as code management of organization repositories."
       name        = "terraform-github"
