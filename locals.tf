@@ -6,6 +6,12 @@ locals {
       topics      = ["configuration-as-code", "ansible"]
       visibility  = "public"
     },
+    "sno-ops" = {
+      description = "Configuration as code management of my single node OpenShift box."
+      name        = "sno-ops"
+      topics      = ["configuration-as-code", "openshift"]
+      visibility  = "private"
+    },
     "terraform-github" = {
       description = "Configuration as code management of organization repositories."
       name        = "terraform-github"
