@@ -10,7 +10,7 @@ locals {
       description = "Configuration as code management of my single node OpenShift box."
       name        = "sno-ops"
       topics      = ["configuration-as-code", "openshift"]
-      visibility  = "private"
+      visibility  = "public"
     },
     "terraform-github" = {
       description = "Configuration as code management of organization repositories."
