@@ -6,6 +6,12 @@ locals {
       topics      = ["configuration-as-code", "ansible"]
       visibility  = "public"
     },
+    "ansible-vmware" = {
+      description = "Ansible repository for managing VMware infrastructure."
+      name        = "ansible-vmware"
+      topics      = ["ansible", "vmware"]
+      visibility  = "public"
+    },
     "sno-ops" = {
       description = "Configuration as code management of my single node OpenShift box."
       name        = "sno-ops"
