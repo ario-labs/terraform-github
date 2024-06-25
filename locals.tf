@@ -6,6 +6,12 @@ locals {
       topics      = ["configuration-as-code", "ansible"]
       visibility  = "public"
     },
+    "ansible-demo-content" = {
+      description = "Playbook content for various Ansible demos."
+      name        = "ansible-demo-content"
+      topics      = ["ansible"]
+      visibility  = "public"
+    },
     "ansible-vmware" = {
       description = "Ansible repository for managing VMware infrastructure."
       name        = "ansible-vmware"
