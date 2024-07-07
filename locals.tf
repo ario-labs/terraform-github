@@ -18,6 +18,12 @@ locals {
       topics      = ["ansible", "vmware"]
       visibility  = "public"
     },
+    "homernetes" = {
+      description = "Configuration as code management of my home Kubernetes cluster."
+      name        = "homernetes"
+      topics      = ["configuration-as-code", "kubernetes"]
+      visibility  = "private"
+    },
     "sno-ops" = {
       description = "Configuration as code management of my single node OpenShift box."
       name        = "sno-ops"
