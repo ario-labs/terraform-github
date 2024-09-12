@@ -10,6 +10,12 @@ locals {
       description = "Playbook content for various Ansible demos."
       name        = "ansible-demo-content"
       topics      = ["ansible"]
+      visibility  = "private"
+    },
+    "ansible-openshift" = {
+      description = "Ansible repository for managing OpenShift infrastructure."
+      name        = "ansible-openshift"
+      topics      = ["ansible", "openshift"]
       visibility  = "public"
     },
     "ansible-vmware" = {
