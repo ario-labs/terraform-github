@@ -12,17 +12,11 @@ locals {
       topics      = ["ansible"]
       visibility  = "private"
     },
-    "ansible-openshift" = {
-      description = "Ansible repository for managing OpenShift infrastructure."
-      name        = "ansible-openshift"
-      topics      = ["ansible", "openshift"]
-      visibility  = "public"
-    },
-    "ansible-vmware" = {
-      description = "Ansible repository for managing VMware infrastructure."
-      name        = "ansible-vmware"
-      topics      = ["ansible", "vmware"]
-      visibility  = "public"
+    "ansible-homelab" = {
+      description = "Playbook content for managing my homelab."
+      name        = "ansible-homelab"
+      topics      = ["ansible", "homelab"]
+      visibility  = "private"
     },
     "homernetes" = {
       description = "Configuration as code management of my home Kubernetes cluster."
