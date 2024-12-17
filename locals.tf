@@ -30,6 +30,12 @@ locals {
       topics      = ["configuration-as-code", "openshift"]
       visibility  = "public"
     },
+    "ocp-neptune" = {
+      description = "Configuration as code management of my compact OpenShift cluster."
+      name        = "ocp-neptune"
+      topics      = ["configuration-as-code", "openshift"]
+      visibility  = "public"
+    },
     "terraform-github" = {
       description = "Configuration as code management of organization repositories."
       name        = "terraform-github"
