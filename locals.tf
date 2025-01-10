@@ -12,6 +12,12 @@ locals {
       topics      = ["ansible"]
       visibility  = "private"
     },
+    "ansible-demos" = {
+      description = "Playbook content for various Ansible demos."
+      name        = "ansible-demos"
+      topics      = ["ansible", "demo"]
+      visibility  = "private"
+    },
     "ansible-homelab" = {
       description = "Playbook content for managing my homelab."
       name        = "ansible-homelab"
