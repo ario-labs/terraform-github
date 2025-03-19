@@ -21,7 +21,7 @@ resource "github_repository" "self" {
 }
 
 resource "github_branch_protection" "self" {
-  count = try(var.has_branch_protection ? 1 : 0, 1)
+  count = var.visibility == "public" && var.has_branch_protection ? 1 : 0
 
   allows_deletions                = false
   allows_force_pushes             = false
