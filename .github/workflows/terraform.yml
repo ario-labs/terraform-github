@@ -1,0 +1,79 @@
+---
+name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
+
+on:
+  push: { branches: ["main"] }
+  pull_request: { branches: ["main"] }
+
+env:
+  TF_LOG: INFO
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_ENDPOINT_URL_S3: ${{ secrets.AWS_ENDPOINT_URL_S3 }}
+
+jobs:
+  terraform:
+    name: "Terraform Infrastructure Change Management"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Cache Terraform Plugins and Modules
+        uses: actions/cache@v4
+        with:
+          path: .terraform
+          key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.11.2
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      - name: Terraform Format Check
+        id: fmt
+        run: terraform fmt -check
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: |
+          terraform plan -out=plan.out -no-color -input=false || true
+          terraform show -no-color plan.out > plan.txt
+      - name: Upload Terraform Plan Artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: plan.txt
+      - name: Comment on PR with Terraform Plan
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const planOutput = fs.readFileSync('plan.txt', 'utf8');
+            const output = `#### Terraform Format: \`${{ steps.fmt.outcome }}\`\n` +
+                           `#### Terraform Init: \`${{ steps.init.outcome }}\`\n` +
+                           `#### Terraform Validate: \`${{ steps.validate.outcome }}\`\n` +
+                           `#### Terraform Plan: \`${{ steps.plan.outcome }}\`\n\n` +
+                           `<details><summary>Show Terraform Plan</summary>\n\n` +
+                           '```\n' + planOutput + '\n```\n</details>\n' +
+                           `*Pushed by: @${{ github.actor }}, Event: \`${{ github.event_name }}\`*`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });
+      - name: Terraform Plan Failure Check
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
