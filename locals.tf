@@ -30,12 +30,6 @@ locals {
       topics      = ["configuration-as-code", "kubernetes"]
       visibility  = "private"
     },
-    "sno-ops" = {
-      description = "Configuration as code management of my single node OpenShift box."
-      name        = "sno-ops"
-      topics      = ["configuration-as-code", "openshift"]
-      visibility  = "public"
-    },
     "ocp-neptune" = {
       description = "Configuration as code management of my compact OpenShift cluster."
       name        = "ocp-neptune"
