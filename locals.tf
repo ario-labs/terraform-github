@@ -36,6 +36,12 @@ locals {
       topics      = ["configuration-as-code", "openshift"]
       visibility  = "public"
     },
+    "packer-vmware" = {
+      description = "Packer automation for my VMware infrastructure."
+      name        = "packer-vmware"
+      topics      = ["ansible", "packer", "vmware"]
+      visibility  = "private"
+    },
     "terraform-github" = {
       description = "Configuration as code management of organization repositories."
       name        = "terraform-github"
