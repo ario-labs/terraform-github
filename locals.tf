@@ -42,6 +42,12 @@ locals {
       topics      = ["ansible", "packer", "vmware"]
       visibility  = "private"
     },
+    "terraform-esxi" = {
+      description = "Configuration as code management of my ESXi infrastructure."
+      name        = "terraform-esxi"
+      topics      = ["configuration-as-code", "esxi", "terraform"]
+      visibility  = "private"
+    },
     "terraform-github" = {
       description = "Configuration as code management of organization repositories."
       name        = "terraform-github"
